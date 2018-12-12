@@ -97,6 +97,7 @@
 		C928D07021C0B7B700DD8042 /* iTunesSearch */ = {
 			isa = PBXGroup;
 			children = (
+				C928D0A121C0BB7700DD8042 /* Cells */,
 				C928D07121C0B7B700DD8042 /* AppDelegate.swift */,
 				C928D07321C0B7B700DD8042 /* ViewController.swift */,
 				C928D07521C0B7B700DD8042 /* Main.storyboard */,
@@ -123,6 +124,13 @@
 				C928D09321C0B7B800DD8042 /* Info.plist */,
 			);
 			path = iTunesSearchUITests;
+			sourceTree = "<group>";
+		};
+		C928D0A121C0BB7700DD8042 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
