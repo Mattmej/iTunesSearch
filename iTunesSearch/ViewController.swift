@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 //
 //struct MainObject {
@@ -19,7 +20,7 @@ import Alamofire
 //}
 //
 //struct Album {
-//    let 
+//    let
 //}
 //
 
@@ -41,6 +42,13 @@ class ViewController: UIViewController {
 //            print("Do stuff")
 //        }.resume()
         
+        
+        
+        //MARK: - Networking and Retrieving JSON
+        /***************************************************************/
+        
+        
+        
         // We will change this later. Need to make limit changeable.
         let mainURLString = "http://itunes.apple.com/us/rss/topalbums/limit=10/json"
         guard let mainURL = URL(string: mainURLString) else { return }
@@ -52,11 +60,9 @@ class ViewController: UIViewController {
         var urlRequest = URLRequest(url: mainURL)
         urlRequest.httpMethod = "GET"
         
-        Alamofire.request(urlRequest).response { (dataResponse) in
-            do {
-                
-            }
-            catch {}
+        Alamofire.request(urlRequest).responseJSON { (dataResponse) in
+            
+            print(dataResponse.result.value!)
         }.resume()
     }
 
