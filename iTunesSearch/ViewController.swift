@@ -62,7 +62,10 @@ class ViewController: UIViewController {
         
         Alamofire.request(urlRequest).responseJSON { (dataResponse) in
             
-            print(dataResponse.result.value!)
+//            print(dataResponse.result.value!)
+            let albumJSON: JSON = JSON(dataResponse.result.value!)
+//            print(albumJSON)
+//            print(albumJSON["feed"]["entry"][0])
         }.resume()
     }
 
