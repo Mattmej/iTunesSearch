@@ -10,23 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-//
-//struct MainObject {
-//    let feed: Feed
-//}
-//
-//struct Feed {
-//    let topAlbums: [Album]
-//}
-//
-//struct Album {
-//    let
-//}
-//
-
-
-
-
 
 
 class ViewController: UIViewController {
@@ -62,11 +45,21 @@ class ViewController: UIViewController {
         
         Alamofire.request(urlRequest).responseJSON { (dataResponse) in
             
-//            print(dataResponse.result.value!)
-            let albumJSON: JSON = JSON(dataResponse.result.value!)
-//            print(albumJSON)
-//            print(albumJSON["feed"]["entry"][0])
+            if dataResponse.result.isSuccess {
+                print("Success! Got album data.")
+                
+                //            print(dataResponse.result.value!)
+                let albumJSON: JSON = JSON(dataResponse.result.value!)
+                //            print(albumJSON)
+//                print(albumJSON["feed"]["entry"][0]["im:name"]["label"])
+                self.getOneAlbumData(json: albumJSON)
+                
+                
+            }
+            
         }.resume()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,11 +71,26 @@ class ViewController: UIViewController {
     
     
     
-    //MARK: - Networking
+    //MARK: - Parsing JSON
     /**************************************************/
     
-    func getAlbumData(url: String, parameters:[String:String]) {
+    // Sample cell
+    // Will make function to fill more cells later.
+    func getOneAlbumData(json: JSON) {
         
+        let album = Album()
+        
+        let albumArray = json["feed"]["entry"]
+        album.albumName = albumArray[0]["im:name"]["label"].stringValue
+        album.artistName = albumArray[0]["im:artist"]["label"].stringValue
+        if let imagePath = albumArray[0]["im:image"][2]["label"].string {
+            album.albumImagePath = imagePath
+            
+            print(album.albumName)
+            print(album.artistName)
+            print(album.albumImagePath!)
+        }
+
     }
 
 
