@@ -9,14 +9,55 @@
 import UIKit
 import Alamofire
 
+//
+//struct MainObject {
+//    let feed: Feed
+//}
+//
+//struct Feed {
+//    let topAlbums: [Album]
+//}
+//
+//struct Album {
+//    let 
+//}
+//
+
+
+
+
+
+
 class ViewController: UIViewController {
     
-    // We will change this later. Need to make limit changeable.
-    let MAIN_URL = "http://itunes.apple.com/us/rss/topalbums/limit=10/json"
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+//        URLSession.shared.dataTask(with: MAIN_URL) { (data, response, err) in
+//            print("Do stuff")
+//        }.resume()
+        
+        // We will change this later. Need to make limit changeable.
+        let mainURLString = "http://itunes.apple.com/us/rss/topalbums/limit=10/json"
+        guard let mainURL = URL(string: mainURLString) else { return }
+        
+//        URLSession.shared.dataTask(with: mainURL) {(data, response, error) in
+//            print("Do stuff")
+//        }.resume()
+        
+        var urlRequest = URLRequest(url: mainURL)
+        urlRequest.httpMethod = "GET"
+        
+        Alamofire.request(urlRequest).response { (dataResponse) in
+            do {
+                
+            }
+            catch {}
+        }.resume()
     }
 
     override func didReceiveMemoryWarning() {
