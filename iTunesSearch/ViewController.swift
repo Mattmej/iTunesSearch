@@ -25,13 +25,13 @@ class ViewController: UIViewController {
     //MARK: - Setting up our service / Moving data between threads
     /***************************************************************/
 
-    func setupService() {
-        let success: successResponse = { [unowned self] albumResponse in
-            DispatchQueue.main.async {
-                <#code#>
-            }
-        }
-    }
+//    func setupService() {
+//        let success: successResponse = { [unowned self] albumResponse in
+//            DispatchQueue.main.async {
+//                <#code#>
+//            }
+//        }
+//    }
     
    
 

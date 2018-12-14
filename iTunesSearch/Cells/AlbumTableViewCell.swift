@@ -29,6 +29,7 @@ class AlbumTableViewCell: UITableViewCell {
     func setup(album: Album) {
         self.albumName.text = album.albumName
         self.albumArtistName.text = album.artistName
+//        self.albumImage.image = UIImage(data: <#T##Data#>)
         
     }
 

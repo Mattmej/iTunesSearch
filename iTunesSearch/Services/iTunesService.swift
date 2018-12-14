@@ -106,6 +106,19 @@ class Service {
         
     }
     
+    //MARK: - Retrieving album image from URL
+    /**************************************************/
+
+    func downloadAlbumImage(urlString: String, completion: @escaping (Data)-> ()) {
+        guard let url = URL(string: urlString) else {return}
+        
+        Alamofire.request(url).response { (dataResponse) in
+            guard let data = dataResponse.data else { return }
+            completion(data)
+        }
+    }
+    
+    
     
     
     
