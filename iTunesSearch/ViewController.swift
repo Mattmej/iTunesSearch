@@ -14,6 +14,9 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     // Instance variable
 //    let album = Album()
     var albums: [Album] = []
@@ -30,10 +33,12 @@ class ViewController: UIViewController {
         let success: successResponse = { [unowned self] albumResponse in
             DispatchQueue.main.async {
                 self.albums = albumResponse
+                self.tableView.reloadData()
             }
         }
         
         service.success = success
+        
     }
     
    
@@ -111,30 +116,30 @@ class ViewController: UIViewController {
 //MARK: - Creating the table
 /**************************************************/
 
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return albums.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AlbumTableViewCell else { return UITableViewCell() }
+
+//        var item: Album?
 //
-//extension ViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AlbumTableViewCell else { return UITableViewCell() }
-//
-////        var item: Album?
-////
-////        item =
-//
-//        cell.setup(album: album)
-//
-//        return cell
-//    }
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
-//}
+//        item =
+
+        cell.setup(album: albums[indexPath.row])
+
+        return cell
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
 
 
 
