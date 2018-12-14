@@ -14,6 +14,9 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
     
+    // Instance variable
+    let album = Album()
+    
    
 
     override func viewDidLoad() {
@@ -57,6 +60,10 @@ class ViewController: UIViewController {
                 
             }
             
+            else {
+                print("Unable to get album data.")
+            }
+            
         }.resume()
         
         
@@ -78,21 +85,67 @@ class ViewController: UIViewController {
     // Will make function to fill more cells later.
     func getOneAlbumData(json: JSON) {
         
-        let album = Album()
+//        let album = Album()
         
         let albumArray = json["feed"]["entry"]
         album.albumName = albumArray[0]["im:name"]["label"].stringValue
         album.artistName = albumArray[0]["im:artist"]["label"].stringValue
+        
+        
         if let imagePath = albumArray[0]["im:image"][2]["label"].string {
             album.albumImagePath = imagePath
             
-            print(album.albumName)
-            print(album.artistName)
-            print(album.albumImagePath!)
+
         }
+        
+        
+        
+        print(album.albumName)
+        print(album.artistName)
+        print(album.albumImagePath!)
 
     }
+    
+    //MARK: - Downloading album image
+    /**************************************************/
+
+//    func downloadImage(urlString: String) {
+//
+//    }
 
 
 }
+
+
+//MARK: - Creating the table
+/**************************************************/
+
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AlbumTableViewCell else { return UITableViewCell() }
+        
+//        var item: Album?
+//
+//        item =
+        
+        cell.setup(album: album)
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
+
+
+
+
 

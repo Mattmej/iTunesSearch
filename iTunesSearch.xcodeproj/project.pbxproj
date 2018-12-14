@@ -17,7 +17,9 @@
 		C928D07C21C0B7B800DD8042 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C928D07A21C0B7B800DD8042 /* LaunchScreen.storyboard */; };
 		C928D08721C0B7B800DD8042 /* iTunesSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C928D08621C0B7B800DD8042 /* iTunesSearchTests.swift */; };
 		C928D09221C0B7B800DD8042 /* iTunesSearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C928D09121C0B7B800DD8042 /* iTunesSearchUITests.swift */; };
+		C9877B5E21C38BC400F20C69 /* iTunesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9877B5D21C38BC400F20C69 /* iTunesService.swift */; };
 		C9B2652321C30C63006FD045 /* iTunesAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2652221C30C63006FD045 /* iTunesAlbum.swift */; };
+		C9B2652621C31E31006FD045 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B2652521C31E31006FD045 /* AlbumTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +58,9 @@
 		C928D08D21C0B7B800DD8042 /* iTunesSearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iTunesSearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C928D09121C0B7B800DD8042 /* iTunesSearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchUITests.swift; sourceTree = "<group>"; };
 		C928D09321C0B7B800DD8042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9877B5D21C38BC400F20C69 /* iTunesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesService.swift; sourceTree = "<group>"; };
 		C9B2652221C30C63006FD045 /* iTunesAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesAlbum.swift; sourceTree = "<group>"; };
+		C9B2652521C31E31006FD045 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		DA8E89C889B4A26600BA1A70 /* Pods_iTunesSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7DBE9B36818FA14839D03D /* Pods-iTunesSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesSearch/Pods-iTunesSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		E0AA6705E07ABC15BE9D6296 /* Pods_iTunesSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iTunesSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +143,7 @@
 		C928D07021C0B7B700DD8042 /* iTunesSearch */ = {
 			isa = PBXGroup;
 			children = (
+				C9877B5C21C38BAC00F20C69 /* Services */,
 				C9B2651921C308AE006FD045 /* Models */,
 				C928D0A121C0BB7700DD8042 /* Cells */,
 				C928D07121C0B7B700DD8042 /* AppDelegate.swift */,
@@ -172,8 +177,17 @@
 		C928D0A121C0BB7700DD8042 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C9B2652521C31E31006FD045 /* AlbumTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		C9877B5C21C38BAC00F20C69 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C9877B5D21C38BC400F20C69 /* iTunesService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		C9B2651921C308AE006FD045 /* Models */ = {
@@ -398,7 +412,9 @@
 			files = (
 				C9B2652321C30C63006FD045 /* iTunesAlbum.swift in Sources */,
 				C928D07421C0B7B700DD8042 /* ViewController.swift in Sources */,
+				C9877B5E21C38BC400F20C69 /* iTunesService.swift in Sources */,
 				C928D07221C0B7B700DD8042 /* AppDelegate.swift in Sources */,
+				C9B2652621C31E31006FD045 /* AlbumTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
