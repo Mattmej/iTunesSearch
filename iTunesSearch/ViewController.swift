@@ -15,7 +15,23 @@ import SwiftyJSON
 class ViewController: UIViewController {
     
     // Instance variable
-    let album = Album()
+//    let album = Album()
+    var albums: [Album] = []
+    
+    var service = Service()
+    
+    
+    
+    //MARK: - Setting up our service / Moving data between threads
+    /***************************************************************/
+
+    func setupService() {
+        let success: successResponse = { [unowned self] albumResponse in
+            DispatchQueue.main.async {
+                <#code#>
+            }
+        }
+    }
     
    
 
@@ -34,37 +50,8 @@ class ViewController: UIViewController {
         /***************************************************************/
         
         
+        service.retrieveJSON()
         
-        // We will change this later. Need to make limit changeable.
-        let mainURLString = "http://itunes.apple.com/us/rss/topalbums/limit=10/json"
-        guard let mainURL = URL(string: mainURLString) else { return }
-        
-//        URLSession.shared.dataTask(with: mainURL) {(data, response, error) in
-//            print("Do stuff")
-//        }.resume()
-        
-        var urlRequest = URLRequest(url: mainURL)
-        urlRequest.httpMethod = "GET"
-        
-        Alamofire.request(urlRequest).responseJSON { (dataResponse) in
-            
-            if dataResponse.result.isSuccess {
-                print("Success! Got album data.")
-                
-                //            print(dataResponse.result.value!)
-                let albumJSON: JSON = JSON(dataResponse.result.value!)
-                //            print(albumJSON)
-//                print(albumJSON["feed"]["entry"][0]["im:name"]["label"])
-                self.getOneAlbumData(json: albumJSON)
-                
-                
-            }
-            
-            else {
-                print("Unable to get album data.")
-            }
-            
-        }.resume()
         
         
     }
@@ -85,7 +72,7 @@ class ViewController: UIViewController {
     // Will make function to fill more cells later.
     func getOneAlbumData(json: JSON) {
         
-//        let album = Album()
+        let album = Album()
         
         let albumArray = json["feed"]["entry"]
         album.albumName = albumArray[0]["im:name"]["label"].stringValue
@@ -120,30 +107,30 @@ class ViewController: UIViewController {
 //MARK: - Creating the table
 /**************************************************/
 
-
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AlbumTableViewCell else { return UITableViewCell() }
-        
-//        var item: Album?
 //
-//        item =
-        
-        cell.setup(album: album)
-        
-        return cell
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-}
+//extension ViewController: UITableViewDelegate, UITableViewDataSource {
+//
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? AlbumTableViewCell else { return UITableViewCell() }
+//
+////        var item: Album?
+////
+////        item =
+//
+//        cell.setup(album: album)
+//
+//        return cell
+//    }
+//
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//}
 
 
 

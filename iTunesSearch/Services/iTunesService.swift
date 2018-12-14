@@ -11,8 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 
-typealias successResponse = ([Album])
- -> ()
+typealias successResponse = ([Album]) -> ()
 
 typealias failureResponse = () -> ()
 
@@ -21,6 +20,8 @@ class Service {
     var failure: failureResponse!
 
     
+    
+    // TODO: add input variable for number of results
     func retrieveJSON() {
         
         
@@ -35,7 +36,7 @@ class Service {
         var urlRequest = URLRequest(url: mainURL)
         urlRequest.httpMethod = "GET"
         
-        Alamofire.request(urlRequest).responseJSON { (dataResponse) in
+        Alamofire.request(urlRequest).responseJSON(queue: DispatchQueue.global(), options: .mutableLeaves) { (dataResponse) in
             
             if dataResponse.result.isSuccess {
                 print("Success! Got album data.")
@@ -44,7 +45,9 @@ class Service {
                 let albumJSON: JSON = JSON(dataResponse.result.value!)
                 //            print(albumJSON)
                 //                print(albumJSON["feed"]["entry"][0]["im:name"]["label"])
-                self.getOneAlbumData(json: albumJSON)
+                self.getAlbumData(json: albumJSON)
+                
+//                var albums =
                 
                 
             }
@@ -52,6 +55,8 @@ class Service {
             else {
                 print("Unable to get album data.")
             }
+            
+//            self.success?(
             
         }
     }
@@ -61,26 +66,43 @@ class Service {
     
     // Sample cell
     // Will make function to fill more cells later.
-    func getOneAlbumData(json: JSON) {
+    func getAlbumData(json: JSON) {
         
-                let album = Album()
+//        let album = Album()
+        var albums: [Album] = []
         
-        let albumArray = json["feed"]["entry"]
-        album.albumName = albumArray[0]["im:name"]["label"].stringValue
-        album.artistName = albumArray[0]["im:artist"]["label"].stringValue
+        let albumArray = json["feed"]["entry"].array!
+//        album.albumName = albumArray[0]["im:name"]["label"].stringValue
+//        album.artistName = albumArray[0]["im:artist"]["label"].stringValue
         
-        
-        if let imagePath = albumArray[0]["im:image"][2]["label"].string {
-            album.albumImagePath = imagePath
+        for item in albumArray {
+            let albumName = item["im:name"]["label"].stringValue
+            let artistName = item["im:artist"]["label"].stringValue
             
+            let album = Album()
+            album.albumName = albumName
+            album.artistName = artistName
             
+            if let imagePath = item["im:image"][2]["label"].string {
+                album.albumImagePath = imagePath
+            }
+            
+            else {
+                album.albumImagePath = ""
+            }
+            
+            albums.append(album)
         }
         
         
+        // Store successful object to use in main thread
+        self.success?(albums)
         
-        print(album.albumName)
-        print(album.artistName)
-        print(album.albumImagePath!)
+        
+//
+//        print(album.albumName)
+//        print(album.artistName)
+//        print(album.albumImagePath!)
         
     }
     
