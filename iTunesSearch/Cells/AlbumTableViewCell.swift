@@ -14,6 +14,7 @@ class AlbumTableViewCell: UITableViewCell {
     @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var albumArtistName: UILabel!
     
+    let service = Service()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +31,10 @@ class AlbumTableViewCell: UITableViewCell {
         self.albumName.text = album.albumName
         self.albumArtistName.text = album.artistName
 //        self.albumImage.image = UIImage(data: <#T##Data#>)
+        
+        service.downloadAlbumImage(urlString: album.albumImagePath!) { (imageData) in
+            self.albumImage.image = UIImage(data:imageData)
+        }
         
     }
 

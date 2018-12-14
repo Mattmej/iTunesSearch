@@ -25,13 +25,16 @@ class ViewController: UIViewController {
     //MARK: - Setting up our service / Moving data between threads
     /***************************************************************/
 
-//    func setupService() {
-//        let success: successResponse = { [unowned self] albumResponse in
-//            DispatchQueue.main.async {
-//                <#code#>
-//            }
-//        }
-//    }
+    // Move data from second thread to main thread
+    func setupService() {
+        let success: successResponse = { [unowned self] albumResponse in
+            DispatchQueue.main.async {
+                self.albums = albumResponse
+            }
+        }
+        
+        service.success = success
+    }
     
    
 
@@ -51,6 +54,7 @@ class ViewController: UIViewController {
         
         
         service.retrieveJSON()
+        self.setupService()
         
         
         

@@ -92,7 +92,10 @@ class Service {
             }
             
             albums.append(album)
+            print(album.albumName)
         }
+        
+//        print(albums[0].albumName)
         
         
         // Store successful object to use in main thread
@@ -103,6 +106,8 @@ class Service {
 //        print(album.albumName)
 //        print(album.artistName)
 //        print(album.albumImagePath!)
+        
+//        print(albums[0])
         
     }
     
